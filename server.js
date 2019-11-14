@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+var cors = require("cors");
 const { Message } = require("./models");
 const port = 8080;
 
@@ -8,6 +9,7 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello Friend!");

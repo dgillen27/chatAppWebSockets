@@ -1,15 +1,42 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import "./App.css";
+import { Route } from "react-router-dom";
+import { withRouter } from "react-router";
+import Login from "./components/Login";
+import NavBar from "./components/NavBar";
+import MessageBoard from "./components/MessageBoard";
 
-function App() {
+function App(props) {
+  const [user, setUser] = useState(
+    // Check local storage to see if someone is logged in, if so, set user to local storage user
+    localStorage.getItem("user") ? localStorage.getItem("user") : ""
+  );
+
+  // Check if a user is logged in, if not send them to login page
+  useEffect(() => {
+    !user && props.history.push("/");
+  }, [user]);
+
+  // log out user and send them to login page
+  const logOut = () => {
+    localStorage.clear();
+    setUser("");
+    props.history.push("/");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      <NavBar user={user} logOut={logOut} />
+      {!user && (
+        <Route
+          exact
+          path="/"
+          render={props => <Login setUser={setUser} {...props} />}
+        />
+      )}
+      <Route exact path="/messages" render={props => <MessageBoard />} />
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
