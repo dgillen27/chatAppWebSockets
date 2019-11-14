@@ -14,7 +14,7 @@ function App(props) {
 
   // Check if a user is logged in, if not send them to login page
   useEffect(() => {
-    !user && props.history.push("/");
+    !user ? props.history.push("/") : props.history.push("/messages");
   }, [user, props.history]);
 
   // log out user and send them to login page

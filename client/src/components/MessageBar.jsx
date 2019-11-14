@@ -7,15 +7,16 @@ const InputDiv = styled.div`
   margin-left: 15vw;
   height: 67px;
   border: 3px solid red;
+  display: flex;
+  align-items: center;
 `;
 
 const Input = styled.input`
   height: calc(100% - 6px);
   outline: none;
-  // border: none;
   margin-left: 3px;
   font-size: 100%;
-  width: 90%;
+  width: 89%;
 `;
 
 const Button = styled.button`
