@@ -11,27 +11,25 @@ const MessageDiv = styled.div`
   height: 80vh;
 `;
 
-export default function MessageList() {
-  const [messages, setMessages] = useState(null);
-  console.log(messages);
-
+export default function MessageList({ messages, setMessages }) {
   useEffect(() => {
     async function getData() {
-      return await getMessages();
+      const data = await getMessages();
+      setMessages(data);
     }
-    setMessages(getData);
+    getData();
   }, []);
+
+  console.log(messages);
 
   return (
     <MessageDiv>
-      {/* {!!messages.message &&
-        messages.message.map(message => (
-          <div
-            style={{ backgroundColor: "red", height: "60px", width: "60px" }}
-          >
-            {message.userName}: {message.content}
+      {messages.message &&
+        messages.message.map((m, i) => (
+          <div key={i} style={{ marginLeft: "5px" }}>
+            {m.userName}: {m.content}
           </div>
-        ))} */}
+        ))}
     </MessageDiv>
   );
 }
