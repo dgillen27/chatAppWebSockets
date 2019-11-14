@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getMessages } from "../services/messages";
 
 const MessageDiv = styled.div`
   width: 85vw;
@@ -9,29 +8,18 @@ const MessageDiv = styled.div`
   border: 2px solid green;
   margin-left: 15vw;
   height: 80vh;
+  overflow-y: scroll;
 `;
 
-export default function MessageList() {
-  const [messages, setMessages] = useState(null);
-  console.log(messages);
-
-  useEffect(() => {
-    async function getData() {
-      return await getMessages();
-    }
-    setMessages(getData);
-  }, []);
-
+export default function MessageList({ messages, setMessages }) {
   return (
     <MessageDiv>
-      {/* {!!messages.message &&
-        messages.message.map(message => (
-          <div
-            style={{ backgroundColor: "red", height: "60px", width: "60px" }}
-          >
-            {message.userName}: {message.content}
+      {messages.message &&
+        messages.message.map((m, i) => (
+          <div key={i} style={{ marginLeft: "5px" }}>
+            {m.userName}: {m.content}
           </div>
-        ))} */}
+        ))}
     </MessageDiv>
   );
 }

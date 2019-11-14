@@ -14,8 +14,8 @@ function App(props) {
 
   // Check if a user is logged in, if not send them to login page
   useEffect(() => {
-    !user && props.history.push("/");
-  }, [user]);
+    !user ? props.history.push("/") : props.history.push("/messages");
+  }, [user, props.history]);
 
   // log out user and send them to login page
   const logOut = () => {
@@ -34,7 +34,11 @@ function App(props) {
           render={props => <Login setUser={setUser} {...props} />}
         />
       )}
-      <Route exact path="/messages" render={props => <MessageBoard />} />
+      <Route
+        exact
+        path="/messages"
+        render={props => <MessageBoard user={user} />}
+      />
     </div>
   );
 }
