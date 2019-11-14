@@ -16,7 +16,7 @@ export default function MessageList({ messages, setMessages }) {
     <MessageDiv>
       {messages.message &&
         messages.message.map((m, i) => (
-          <div key={i} style={{ marginLeft: "5px" }}>
+          <div key={i} style={{ marginLeft: "15px" }}>
             {m.userName}: {m.content}
           </div>
         ))}
