@@ -10,14 +10,14 @@ export default function MessageBoard({ user }) {
   const [inputValue, setInputValue] = useState("");
   const endpoint = "http://localhost:8080";
   const socket = socketIOClient(endpoint);
-  const send = () => {
-    socket.emit("new message", messages);
-  };
-  const post = async content => {
-    await postMessage({ userName: user, content: content });
-    const data = await getMessages();
-    setMessages(data);
-    send();
+  // const send = () => {
+  //   socket.emit("new message", messages);
+  // };
+  const post = async e => {
+    e.preventDefault();
+    await postMessage({ userName: user, content: inputValue });
+    // const data = await getMessages();
+    // setMessages(data);
     socket.emit("new message", messages);
     setInputValue("");
   };
@@ -39,8 +39,8 @@ export default function MessageBoard({ user }) {
 
   return (
     <div>
-      <MessageList messages={messages} setMessages={setMessages} />
-      <UserBar />
+      <MessageList messages={messages} setMessages={setMessages} user={user} />
+      {/* <UserBar userList={userList} /> */}
       <MessageBar
         post={post}
         inputValue={inputValue}

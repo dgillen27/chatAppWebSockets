@@ -5,17 +5,27 @@ import { withRouter } from "react-router";
 import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 import MessageBoard from "./components/MessageBoard";
+import socketIOClient from "socket.io-client";
 
 function App(props) {
   const [user, setUser] = useState(
     // Check local storage to see if someone is logged in, if so, set user to local storage user
     localStorage.getItem("user") ? localStorage.getItem("user") : ""
   );
+  const [userList, setUserList] = useState([]);
+  const endpoint = "http://localhost:8080";
+  const socket = socketIOClient(endpoint);
+  socket.emit("user", user);
 
   // Check if a user is logged in, if not send them to login page
   useEffect(() => {
-    !user ? props.history.push("/") : props.history.push("/messages");
-  }, [user, props.history]);
+    // !user ? props.history.push("/") : props.history.push("/messages");
+    socket.on("user", activeUser => {
+      console.log(activeUser, "is active");
+      // activeUser && setUserList(userList.push(activeUser));
+      console.log(userList);
+    });
+  }, [user, props.history, userList]);
 
   // log out user and send them to login page
   const logOut = () => {

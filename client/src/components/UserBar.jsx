@@ -11,6 +11,10 @@ const UserDiv = styled.div`
   left: 0;
 `;
 
-export default function UserBar() {
-  return <UserDiv></UserDiv>;
+export default function UserBar({ userList }) {
+  return (
+    <UserDiv>
+      {userList[0] && userList.map((user, id) => <p key={id}>{user}</p>)}
+    </UserDiv>
+  );
 }

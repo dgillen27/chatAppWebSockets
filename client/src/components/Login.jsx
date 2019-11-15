@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const LoginDiv = styled.div`
+const LoginDiv = styled.form`
   margin-top: 100px;
   margin-left: 50px;
 `;
@@ -10,7 +10,8 @@ export default function Login(props) {
   const { setUser } = props;
 
   const [userText, setUserText] = useState("");
-  const login = () => {
+  const login = e => {
+    e.preventDefault();
     setUser(userText);
     localStorage.setItem("user", userText);
     setUserText("");

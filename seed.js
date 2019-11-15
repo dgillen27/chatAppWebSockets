@@ -4,7 +4,7 @@ async function seed() {
   await Message.destroy({ where: {} });
 
   const message = await Message.create({
-    userName: "SmellyJoe",
+    userName: "Dan",
     content: "Wow my first message"
   });
 

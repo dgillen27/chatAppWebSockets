@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function NavBar(props) {
   const Nav = styled.div`
-    background: palevioletred;
+    background: #f0f0f0;
     height: 67px;
     width: 100vw;
     position: fixed;
@@ -16,8 +16,8 @@ export default function NavBar(props) {
     background: white;
     height: 45px;
     width: 100px;
-    border: 3px solid #f5b83d;
-    color: #f5b83d;
+    border: 3px solid #1b89f5;
+    color: #1b89f5;
     border-radius: 5px;
     position: absolute;
     right: 50px;
@@ -26,7 +26,7 @@ export default function NavBar(props) {
   `;
 
   const UserName = styled.div`
-    color: white;
+    color: black;
     font-size: 20px;
     position: absolute;
     left: 50px;
