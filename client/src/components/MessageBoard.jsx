@@ -4,10 +4,10 @@ import MessageList from "./MessageList";
 import MessageBar from "./MessageBar";
 import { getMessages, postMessage } from "../services/messages";
 import socketIOClient from "socket.io-client";
-import { useInterval } from "./customHooks/useInterval";
 
 export default function MessageBoard({ user }) {
   const [messages, setMessages] = useState({});
+  const [inputValue, setInputValue] = useState("");
   const endpoint = "http://localhost:8080";
   const socket = socketIOClient(endpoint);
   const send = () => {
@@ -19,6 +19,7 @@ export default function MessageBoard({ user }) {
     setMessages(data);
     send();
     socket.emit("new message", messages);
+    setInputValue("");
   };
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function MessageBoard({ user }) {
       const resp = await getMessages();
       setMessages(resp);
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     async function getData() {
@@ -40,7 +41,11 @@ export default function MessageBoard({ user }) {
     <div>
       <MessageList messages={messages} setMessages={setMessages} />
       <UserBar />
-      <MessageBar post={post} />
+      <MessageBar
+        post={post}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </div>
   );
 }

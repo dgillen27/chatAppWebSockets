@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { getMessages, postMessage } from "../services/messages";
 
 const InputDiv = styled.div`
   width: 85vw;
@@ -24,8 +23,7 @@ const Button = styled.button`
   width: 9%;
 `;
 
-export default function MessageBar({ post }) {
-  const [inputValue, setInputValue] = useState("");
+export default function MessageBar({ post, inputValue, setInputValue }) {
   return (
     <>
       <InputDiv>
