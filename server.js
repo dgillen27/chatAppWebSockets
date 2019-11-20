@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello Friend!");
+  res.json({ message: "Hello Friend!" });
 });
 
 app.get("/messages", async (req, res) => {
