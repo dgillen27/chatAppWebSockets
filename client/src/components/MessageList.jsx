@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 const MessageDiv = styled.div`
   width: 100vw;
-  margin-top: 67px;
-  height: 200px;
-  height: 83vh;
+  height: calc(100vh - 134px);
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 67px;
+  bottom: 67px;
 `;
 
 const Message = styled.div`
@@ -30,12 +31,13 @@ const UserMessage = styled.div`
   margin-right: 10px;
   max-width: 50vw;
 `;
-export default function MessageList({ messages, user, setMessages }) {
+export default function MessageList({ messages, user, setMessages, myRef }) {
   return (
     <MessageDiv>
       {messages.message &&
         messages.message.map((m, i) => (
           <div
+            ref={myRef}
             key={i}
             style={m.userName === user ? { alignSelf: "flex-end" } : null}
           >

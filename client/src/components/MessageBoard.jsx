@@ -10,16 +10,16 @@ export default function MessageBoard({ user }) {
   const [inputValue, setInputValue] = useState("");
   const endpoint = "http://localhost:8080";
   const socket = socketIOClient(endpoint);
-  // const send = () => {
-  //   socket.emit("new message", messages);
-  // };
+  const messageRef = React.useRef();
+  const scroll = () => {
+    messageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const post = async e => {
     e.preventDefault();
     await postMessage({ userName: user, content: inputValue });
-    // const data = await getMessages();
-    // setMessages(data);
     socket.emit("new message", messages);
     setInputValue("");
+    // scroll();
   };
 
   useEffect(() => {
@@ -39,7 +39,12 @@ export default function MessageBoard({ user }) {
 
   return (
     <div>
-      <MessageList messages={messages} setMessages={setMessages} user={user} />
+      <MessageList
+        messages={messages}
+        setMessages={setMessages}
+        user={user}
+        myRef={messageRef}
+      />
       {/* <UserBar userList={userList} /> */}
       <MessageBar
         post={post}

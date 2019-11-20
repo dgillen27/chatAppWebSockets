@@ -22,6 +22,9 @@ const Input = styled.input`
   font-size: 100%;
   width: 90%;
   padding-left: 20px;
+  @media (max-width: 800px) {
+    width: 80%;
+  }
 `;
 
 const Button = styled.button`
@@ -30,6 +33,12 @@ const Button = styled.button`
   border-radius: 75px;
   border: none;
   background: white;
+  :focus {
+    outline: none;
+  }
+  @media (max-width: 800px) {
+    width: 19%;
+  }
 `;
 
 export default function MessageBar({ post, inputValue, setInputValue }) {
