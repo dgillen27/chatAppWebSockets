@@ -1,5 +1,5 @@
 const axios = require("axios");
-const BASE_URl = "http://localhost:8080";
+const BASE_URl = "https://dans-chat-app.herokuapp.com";
 
 const getMessages = async () => {
   const resp = await axios.get(`${BASE_URl}/messages`);

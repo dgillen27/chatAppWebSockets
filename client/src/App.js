@@ -13,7 +13,7 @@ function App(props) {
     localStorage.getItem("user") ? localStorage.getItem("user") : ""
   );
   const [userList, setUserList] = useState([]);
-  const endpoint = "http://localhost:8080";
+  const endpoint = "https://dans-chat-app.herokuapp.com/";
   const socket = socketIOClient(endpoint);
   socket.emit("user", user);
 

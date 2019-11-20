@@ -8,7 +8,7 @@ import socketIOClient from "socket.io-client";
 export default function MessageBoard({ user }) {
   const [messages, setMessages] = useState({});
   const [inputValue, setInputValue] = useState("");
-  const endpoint = "http://localhost:8080";
+  const endpoint = "https://dans-chat-app.herokuapp.com/";
   const socket = socketIOClient(endpoint);
   const messageRef = React.useRef();
   const scroll = () => {

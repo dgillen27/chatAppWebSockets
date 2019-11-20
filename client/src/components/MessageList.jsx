@@ -15,21 +15,31 @@ const MessageDiv = styled.div`
 const Message = styled.div`
   background: lightgrey;
   border-radius: 25px;
-  display: inline;
-  padding: 10px;
+  padding: 12px;
   margin-left: 10px;
+  display: inline-block;
+  width: auto;
+  height: auto;
   max-width: 50vw;
 `;
 
 const UserMessage = styled.div`
   background: #1b89f5;
   border-radius: 25px;
-  display: inline;
-  padding: 10px;
+  padding: 12px;
   align-self: flex-start;
   color: white;
   margin-right: 10px;
+  width: auto;
   max-width: 50vw;
+  display: inline-block;
+  height: auto;
+  // height: 500px;
+`;
+
+const Space = styled.div`
+  height: 15px;
+  width: 50px;
 `;
 export default function MessageList({ messages, user, setMessages, myRef }) {
   return (
@@ -41,7 +51,7 @@ export default function MessageList({ messages, user, setMessages, myRef }) {
             key={i}
             style={m.userName === user ? { alignSelf: "flex-end" } : null}
           >
-            <div style={{ height: "15px", width: "1px" }}></div>
+            <Space></Space>
             {m.userName === user ? (
               <UserMessage>{m.content}</UserMessage>
             ) : (
@@ -49,7 +59,7 @@ export default function MessageList({ messages, user, setMessages, myRef }) {
                 {m.userName}: {m.content}
               </Message>
             )}
-            <div style={{ height: "15px", width: "50px" }}></div>
+            <Space></Space>
           </div>
         ))}
     </MessageDiv>
