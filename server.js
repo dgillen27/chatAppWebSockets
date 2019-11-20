@@ -5,7 +5,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 const { Message } = require("./models");
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const app = express();
 const server = http.createServer(app);
