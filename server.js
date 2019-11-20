@@ -51,7 +51,7 @@ app.get("/messages", async (req, res) => {
 
     res.json({ message: message });
   } catch (e) {
-    console.log("e");
+    console.error(e);
   }
 });
 
