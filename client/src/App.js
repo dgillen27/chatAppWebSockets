@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -22,6 +22,11 @@ function App(props) {
   // const endpoint = "http://localhost:8080";
   const socket = socketIOClient(endpoint);
 
+  useEffect(() => {
+    if (!!user) {
+      props.history.push("/messages");
+    } else if (!user) props.history.push("/");
+  }, [props.history]);
   return (
     <div className="App">
       <NavBar user={user} logOut={logOut} />

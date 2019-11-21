@@ -45,12 +45,6 @@ export default function Login(props) {
     }
   };
 
-  useEffect(() => {
-    if (!!user) {
-      props.history.push("/messages");
-    }
-  }, [user, props.history]);
-
   const toggleRememberUser = () => {
     setRememberUser(!rememberUser);
   };
