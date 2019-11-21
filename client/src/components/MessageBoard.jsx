@@ -11,15 +11,11 @@ export default function MessageBoard({ user }) {
   const endpoint = "https://dans-chat-app.herokuapp.com/";
   const socket = socketIOClient(endpoint);
   const messageRef = React.useRef();
-  const scroll = () => {
-    messageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
   const post = async e => {
     e.preventDefault();
     await postMessage({ userName: user, content: inputValue });
     socket.emit("new message", messages);
     setInputValue("");
-    // scroll();
   };
 
   useEffect(() => {

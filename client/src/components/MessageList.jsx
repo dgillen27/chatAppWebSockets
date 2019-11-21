@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { animateScroll } from "react-scroll";
 
 const MessageDiv = styled.div`
   width: 100vw;
@@ -42,8 +43,14 @@ const Space = styled.div`
   width: 50px;
 `;
 export default function MessageList({ messages, user, setMessages, myRef }) {
+  useEffect(() => {
+    animateScroll.scrollToBottom({
+      containerId: "messageList",
+      duration: 100
+    });
+  }, [messages]);
   return (
-    <MessageDiv>
+    <MessageDiv id="messageList">
       {messages.message &&
         messages.message.map((m, i) => (
           <div
