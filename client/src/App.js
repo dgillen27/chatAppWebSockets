@@ -17,16 +17,6 @@ function App(props) {
   const socket = socketIOClient(endpoint);
   socket.emit("user", user);
 
-  // Check if a user is logged in, if not send them to login page
-  useEffect(() => {
-    // !user ? props.history.push("/") : props.history.push("/messages");
-    socket.on("user", activeUser => {
-      console.log(activeUser, "is active");
-      // activeUser && setUserList(userList.push(activeUser));
-      console.log(userList);
-    });
-  }, [user, props.history, userList]);
-
   // log out user and send them to login page
   const logOut = () => {
     localStorage.clear();

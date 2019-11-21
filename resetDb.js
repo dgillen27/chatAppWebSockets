@@ -2,7 +2,7 @@ const { sequelize } = require("./models");
 
 async function resetDb() {
   await sequelize.sync({ force: true });
-  console.log("synced");
+  console.log("New DB synced");
   process.exit();
 }
 
