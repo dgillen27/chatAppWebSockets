@@ -5,7 +5,8 @@ async function seed() {
 
   const message = await Message.create({
     userName: "Dan",
-    content: "Wow my first message"
+    content:
+      "Hello and welcome to the group chat! I just reset the database so if its looking empty here, that's why!"
   });
 
   process.exit();
