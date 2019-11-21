@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -12,7 +12,6 @@ function App(props) {
     // Check local storage to see if someone is logged in, if so, set user to local storage user
     localStorage.getItem("user") ? localStorage.getItem("user") : ""
   );
-  const [userList, setUserList] = useState([]);
 
   const logOut = () => {
     localStorage.clear();

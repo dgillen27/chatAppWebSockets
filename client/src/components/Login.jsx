@@ -49,7 +49,7 @@ export default function Login(props) {
     if (!!user) {
       props.history.push("/messages");
     }
-  }, [user]);
+  }, [user, props.history]);
 
   const toggleRememberUser = () => {
     setRememberUser(!rememberUser);

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import UserBar from "./UserBar";
 import MessageList from "./MessageList";
 import MessageBar from "./MessageBar";
 import { getMessages, postMessage } from "../services/messages";
-import socketIOClient from "socket.io-client";
 
 export default function MessageBoard({ user, socket }) {
   const [messages, setMessages] = useState({});
