@@ -15,6 +15,7 @@ const Input = styled.input`
   font-size: 25px;
   width: 95%;
   max-width: 325px;
+  text-align: center;
 `;
 
 const Button = styled.button`
@@ -53,6 +54,7 @@ export default function Login(props) {
         type="text"
         value={userText}
         onChange={e => setUserText(e.target.value)}
+        placeholder="Enter your name"
       />
       <Button onClick={login}>Log In</Button>
       <div>
