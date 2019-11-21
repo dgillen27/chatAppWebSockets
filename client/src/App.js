@@ -13,16 +13,15 @@ function App(props) {
     localStorage.getItem("user") ? localStorage.getItem("user") : ""
   );
   const [userList, setUserList] = useState([]);
-  const endpoint = "https://dans-chat-app.herokuapp.com/";
-  const socket = socketIOClient(endpoint);
-  socket.emit("user", user);
 
-  // log out user and send them to login page
   const logOut = () => {
     localStorage.clear();
     setUser("");
     props.history.push("/");
   };
+  const endpoint = "https://dans-chat-app.herokuapp.com/";
+  // const endpoint = "http://localhost:8080";
+  const socket = socketIOClient(endpoint);
 
   return (
     <div className="App">
@@ -37,7 +36,7 @@ function App(props) {
       <Route
         exact
         path="/messages"
-        render={props => <MessageBoard user={user} />}
+        render={props => <MessageBoard user={user} socket={socket} />}
       />
     </div>
   );

@@ -5,32 +5,25 @@ import MessageBar from "./MessageBar";
 import { getMessages, postMessage } from "../services/messages";
 import socketIOClient from "socket.io-client";
 
-export default function MessageBoard({ user }) {
+export default function MessageBoard({ user, socket }) {
   const [messages, setMessages] = useState({});
   const [inputValue, setInputValue] = useState("");
-  const endpoint = "https://dans-chat-app.herokuapp.com/";
-  const socket = socketIOClient(endpoint);
   const messageRef = React.useRef();
   const post = async e => {
     e.preventDefault();
     await postMessage({ userName: user, content: inputValue });
-    console.log("posting");
     socket.emit("new message", messages);
     setInputValue("");
   };
 
   useEffect(() => {
-    const unsubscribe = () =>
-      socket.on("recieving message", async () => {
-        const resp = await getMessages();
-        setMessages(resp);
-        console.log("checking messages again?");
-      });
-    console.log("effect number 1");
-
-    return () => unsubscribe();
+    socket.on("new message", async () => {
+      const resp = await getMessages();
+      setMessages(resp);
+    });
   }, [socket]);
 
+  // This is running on mount and that should be it
   useEffect(() => {
     async function getData() {
       const data = await getMessages();
@@ -47,7 +40,6 @@ export default function MessageBoard({ user }) {
         user={user}
         myRef={messageRef}
       />
-      {/* <UserBar userList={userList} /> */}
       <MessageBar
         post={post}
         inputValue={inputValue}
