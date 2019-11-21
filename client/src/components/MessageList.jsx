@@ -4,7 +4,6 @@ import { animateScroll } from "react-scroll";
 
 const MessageDiv = styled.div`
   width: 100vw;
-  height: calc(100vh - 134px);
   overflow-y: scroll;
   display: flex;
   flex-direction: column;

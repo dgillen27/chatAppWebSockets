@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const LoginDiv = styled.form`
@@ -8,6 +8,7 @@ const LoginDiv = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const Input = styled.input`
@@ -28,7 +29,7 @@ const Button = styled.button`
 `;
 
 export default function Login(props) {
-  const { setUser } = props;
+  const { setUser, user } = props;
 
   const [userText, setUserText] = useState("");
   const [rememberUser, setRememberUser] = useState(false);
@@ -43,6 +44,12 @@ export default function Login(props) {
       alert("Please enter your name!");
     }
   };
+
+  useEffect(() => {
+    if (!!user) {
+      props.history.push("/messages");
+    }
+  }, [user]);
 
   const toggleRememberUser = () => {
     setRememberUser(!rememberUser);

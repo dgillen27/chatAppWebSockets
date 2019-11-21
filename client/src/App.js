@@ -26,13 +26,12 @@ function App(props) {
   return (
     <div className="App">
       <NavBar user={user} logOut={logOut} />
-      {!user && (
-        <Route
-          exact
-          path="/"
-          render={props => <Login setUser={setUser} {...props} />}
-        />
-      )}
+
+      <Route
+        exact
+        path="/"
+        render={props => <Login setUser={setUser} user={user} {...props} />}
+      />
       <Route
         exact
         path="/messages"
