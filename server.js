@@ -22,7 +22,7 @@ io.on("connection", socket => {
 
   socket.on("new message", message => {
     console.log("New Message");
-    io.sockets.emit("new message", message);
+    io.sockets.emit("recieving message", message);
   });
 
   socket.on("user", activeUser => {

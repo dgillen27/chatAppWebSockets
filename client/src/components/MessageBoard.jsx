@@ -14,15 +14,21 @@ export default function MessageBoard({ user }) {
   const post = async e => {
     e.preventDefault();
     await postMessage({ userName: user, content: inputValue });
+    console.log("posting");
     socket.emit("new message", messages);
     setInputValue("");
   };
 
   useEffect(() => {
-    socket.on("new message", async () => {
-      const resp = await getMessages();
-      setMessages(resp);
-    });
+    const unsubscribe = () =>
+      socket.on("recieving message", async () => {
+        const resp = await getMessages();
+        setMessages(resp);
+        console.log("checking messages again?");
+      });
+    console.log("effect number 1");
+
+    return () => unsubscribe();
   }, [socket]);
 
   useEffect(() => {

@@ -48,6 +48,7 @@ export default function MessageList({ messages, user, setMessages, myRef }) {
       containerId: "messageList",
       duration: 100
     });
+    console.log("List effect running");
   }, [messages]);
   return (
     <MessageDiv id="messageList">
