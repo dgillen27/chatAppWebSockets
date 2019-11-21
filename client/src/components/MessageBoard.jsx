@@ -5,21 +5,15 @@ import MessageBar from "./MessageBar";
 import { getMessages, postMessage } from "../services/messages";
 import socketIOClient from "socket.io-client";
 
-export default function MessageBoard({ user }) {
+export default function MessageBoard({ user, socket }) {
   const [messages, setMessages] = useState({});
   const [inputValue, setInputValue] = useState("");
-  const endpoint = "https://dans-chat-app.herokuapp.com/";
-  const socket = socketIOClient(endpoint);
   const messageRef = React.useRef();
-  const scroll = () => {
-    messageRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
   const post = async e => {
     e.preventDefault();
     await postMessage({ userName: user, content: inputValue });
     socket.emit("new message", messages);
     setInputValue("");
-    // scroll();
   };
 
   useEffect(() => {
@@ -29,6 +23,7 @@ export default function MessageBoard({ user }) {
     });
   }, [socket]);
 
+  // This is running on mount and that should be it
   useEffect(() => {
     async function getData() {
       const data = await getMessages();
@@ -45,7 +40,6 @@ export default function MessageBoard({ user }) {
         user={user}
         myRef={messageRef}
       />
-      {/* <UserBar userList={userList} /> */}
       <MessageBar
         post={post}
         inputValue={inputValue}

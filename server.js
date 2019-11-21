@@ -8,6 +8,9 @@ const { Message } = require("./models");
 const port = process.env.PORT || 8080;
 
 const app = express();
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(cors());
 const server = http.createServer(app);
 const io = socketIO(server);
 
@@ -21,7 +24,7 @@ io.on("connection", socket => {
   // we make use of the socket.emit method again with the argument given to use from the callback function above
 
   socket.on("new message", message => {
-    console.log("New Message");
+    console.log("New Message", message);
     io.sockets.emit("new message", message);
   });
 
@@ -35,10 +38,6 @@ io.on("connection", socket => {
     console.log("user disconnected");
   });
 });
-
-app.use(logger("dev"));
-app.use(bodyParser.json());
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello Friend!" });
@@ -63,7 +62,3 @@ app.post("/messages", async (req, res) => {
     console.error(e);
   }
 });
-
-// app.listen(port, () => console.log(`App listenging on port ${port}`));
-
-// Socket Stuff
