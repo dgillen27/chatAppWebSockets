@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { animateScroll } from "react-scroll";
+import Loading from "./Loading";
 
 const MessageDiv = styled.div`
   width: 100vw;
@@ -41,6 +42,10 @@ const Space = styled.div`
   height: 15px;
   width: 50px;
 `;
+
+const LoadingText = styled.h2`
+  margin: 0 auto;
+`;
 export default function MessageList({ messages, user, setMessages, myRef }) {
   useEffect(() => {
     animateScroll.scrollToBottom({
@@ -50,7 +55,7 @@ export default function MessageList({ messages, user, setMessages, myRef }) {
   }, [messages]);
   return (
     <MessageDiv id="messageList">
-      {messages.message &&
+      {messages.message ? (
         messages.message.map((m, i) => (
           <div
             ref={myRef}
@@ -67,7 +72,13 @@ export default function MessageList({ messages, user, setMessages, myRef }) {
             )}
             <Space></Space>
           </div>
-        ))}
+        ))
+      ) : (
+        <>
+          <Loading />
+          <LoadingText>Loading...</LoadingText>
+        </>
+      )}
     </MessageDiv>
   );
 }
